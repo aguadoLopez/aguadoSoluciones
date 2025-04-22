@@ -1,4 +1,4 @@
-class Productos {
+class MarcasProductos {
     constructor(id, nombre, imagen) {
         this.id = id;
         this.nombre = nombre;
@@ -7,7 +7,7 @@ class Productos {
 
     // Método estático para crear un objeto Course a partir de los datos que tenemos en la base de datos
     static fromDatabase(data) {
-        return new Productos(
+        return new MarcasProductos(
             data.id,
             data.nombre,
             data.imagen,
@@ -24,4 +24,4 @@ class Productos {
     }
 }
 
-export default Productos;
+export default MarcasProductos;

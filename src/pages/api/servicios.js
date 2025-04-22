@@ -1,5 +1,5 @@
 // Importamos los métodos útiles para interactuar con la base de datos
-import { getAllServicios } from '../../services/servicioService.js';
+import { getAllServicios } from '../../services/serviciosService.js';
 
 /**
  * Método que obtiene todos los servicios almacenados en la base de datos con paginación

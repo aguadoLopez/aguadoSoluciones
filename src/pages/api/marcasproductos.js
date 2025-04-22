@@ -1,8 +1,8 @@
 // Importamos los métodos útiles para interactuar con la base de datos
-import { getAllProductos } from '../../services/productoService.js';
+import { getAllMarcasProductos } from '../../services/marcasProductosService.js';
 
 /**
- * Método que obtiene todos los productos almacenados en la base de datos con paginación
+ * Método que obtiene todas las marcas de productos almacenados en la base de datos con paginación
  * @param {Object} request - Solicitud HTTP que puede contener parámetros de consulta `page` y `limit`
  * @returns Devuelve el cuerpo de la respuesta y el status en el que se encuentra, controlando posibles errores
  */
@@ -21,16 +21,16 @@ export async function GET({ request }) {
         });
       }
   
-      // Llamamos al servicio para obtener los productos con paginación
-      const { productos, totalProductos } = await getAllProductos(page, limit);
+      // Llamamos al servicio para obtener las marcas de productos con paginación
+      const { marcasProductos, totalMarcasProductos } = await getAllMarcasProductos(page, limit);
   
-      // Devuelve la respuesta con los productos paginados y la información de paginación
+      // Devuelve la respuesta con las marcas de productos paginados y la información de paginación
       return new Response(JSON.stringify({
-        productos,
+        marcasProductos,
         pagination: {
           currentPage: page,
-          totalProductos,
-          totalPages: Math.ceil(totalProductos / limit),
+          totalMarcasProductos,
+          totalPages: Math.ceil(totalMarcasProductos / limit),
           limit,
         }
       }), {
@@ -40,7 +40,7 @@ export async function GET({ request }) {
   
     } catch (error) {
       // Manejo de errores
-      return new Response(JSON.stringify({ error: 'No se pudieron obtener los productos' }), {
+      return new Response(JSON.stringify({ error: 'No se pudieron obtener las marcas de productos' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
