@@ -1,0 +1,67 @@
+<section id="carrusel" class="carousel-section container md:m-auto flex flex-col items-center overflow-hidden">
+    <h1 class="text-3xl sm:text-4xl font-bold text-azul1 mb-20 mt-[20px]"><a>Courses</a></h1>
+    <div class="flex flex-row justify-center items-center md:gap-5 w-screen">
+      <button class="text-azul1 font-bold" id="prevBtn">
+        <span class="text-xl">&lt;</span>
+      </button>
+  
+      <div class="carousel-container md:w-[600px] w-3/5 overflow-hidden mx-8">
+        <div id="carousel-items" class="carousel-items flex transition-transform duration-300 ease-in-out">
+          <!-- Los elementos del carrusel se agregan aquí -->
+        </div>
+      </div>
+  
+      <button class="text-azul1 font-bold" id="nextBtn">
+        <span class="text-xl">&gt;</span>
+      </button>
+    </div>
+  </section>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const carouselItems = document.getElementById('carousel-items');
+      const container = document.querySelector('.carousel-container');
+  
+      let currentIndex = 0;
+  
+      function updateCarousel() {
+        if (container instanceof HTMLElement && carouselItems instanceof HTMLElement) {
+          const width = container.offsetWidth;
+          carouselItems.style.transform = `translateX(-${currentIndex * width}px)`;
+        }
+      }
+  
+      if (prevBtn && nextBtn && carouselItems) {
+        prevBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + carouselItems.children.length) % carouselItems.children.length;
+          updateCarousel();
+        });
+  
+        nextBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % carouselItems.children.length;
+          updateCarousel();
+        });
+  
+        window.addEventListener('resize', updateCarousel);
+  
+        fetch(`http://localhost:4321/api/servicios?page=1&limit=5`)
+          .then(response => response.json())
+          .then(data => {
+            const servicios = data.servicios;
+            carouselItems.innerHTML = servicios.map((servicio) => `
+              <div class="carousel flex-shrink-0 flex lg:h-80 lg:w-[600px] md:h-80 md:w-[600px] h-80 w-full bg-center rounded-lg mt-4 justify-center items-center"
+                style="background-image: url('${servicio.imagen}'); background-size: cover; background-position: center;">
+                <div class="text-center text-white">
+                  <h3 class="text-3xl font-bold mb-2">Aguado</h3>
+                  <h3 class="text-3xl font-bold mb-2">Soluciones</h3>
+                </div>
+              </div>
+            `).join('');
+            updateCarousel();
+          });
+      }
+    });
+  </script>
+  
