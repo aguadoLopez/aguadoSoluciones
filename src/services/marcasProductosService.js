@@ -21,7 +21,7 @@ export const getAllMarcasProductos = async (page, limit) => {
       }
   
       // Mapeamos los resultados para crear instancias de la clase MarcasProductos
-      const marcasProductos = result.map(marcaProductos => MarcasProductos.fromDatabase(marcasproductos));
+      const marcasProductos = result.map(marcaproductos => MarcasProductos.fromDatabase(marcaproductos));
   
       // Obtenemos el total de marcas de productos para calcular el número total de páginas
       const [countResult] = await db.query('SELECT COUNT(*) AS total FROM aguado.marcasproductos');

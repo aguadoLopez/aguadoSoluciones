@@ -24,7 +24,7 @@ class Servicios {
             id: this.id,
             nombre: this.nombre,
             descripcion: this.descripcion,
-            prdesgloseice: this.desglose,
+            desglose: this.desglose,
             imagen: this.imagen,
         };
     }

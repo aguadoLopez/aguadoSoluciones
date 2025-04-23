@@ -1,4 +1,4 @@
-import Servicios from "../pages/servicios.astro";
+import Servicios from "../models/Servicios.js";
 import { db } from "../utils/db";
 
 /**
@@ -21,7 +21,7 @@ export const getAllServicios = async (page, limit) => {
       }
   
       // Mapeamos los resultados para crear instancias de la clase Servicios
-      const servicios = result.map(servicio => Servicios.fromDatabase(servicios));
+      const servicios = result.map(servicio => Servicios.fromDatabase(servicio));
   
       // Obtenemos el total de servicios para calcular el número total de páginas
       const [countResult] = await db.query('SELECT COUNT(*) AS total FROM aguado.servicios');
