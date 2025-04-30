@@ -11,7 +11,7 @@ export async function GET({ request }) {
       // Extraemos los parámetros de paginación de la consulta (query)
       const url = new URL(request.url);
       const page = parseInt(url.searchParams.get('page')) || 1; // Página (por defecto 1)
-      const limit = parseInt(url.searchParams.get('limit')) || 5; // Limite (por defecto 5)
+      const limit = parseInt(url.searchParams.get('limit')) || 10; // Limite (por defecto 10)
   
       // Validación simple de los parámetros
       if (page < 1 || limit < 1) {

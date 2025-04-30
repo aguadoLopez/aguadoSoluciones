@@ -34,6 +34,15 @@ VALUES
   Reformas de cocinas y baños
   Sistemas de evacuación y desagüe',
   '/img/fontaneria.jpg'
+),
+(
+  'Instalación de Placas Solares',
+  'Ofrecemos soluciones integrales para el aprovechamiento de la energía solar, tanto en viviendas como en negocios.',
+  'Estudio de viabilidad y dimensionamiento del sistema
+  Instalación de paneles solares fotovoltaicos
+  Integración con la red eléctrica y baterías
+  Mantenimiento preventivo y correctivo',
+  '/img/placasSolares.webp'
 );
 INSERT INTO marcasproductos (nombre, imagen)
 VALUES

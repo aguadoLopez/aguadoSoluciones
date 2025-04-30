@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <!-- Lista de Servicios-->
+    <div class="overflow-x-auto bg-white p-4 shadow-lg rounded-lg">
+        <h2 id="page-title" class="text-[25px] lg:text-[30px] text-black font-semibold mb-4">Servicios</h2>
+          <div id="lista-servicios" class="flex flex-wrap gap-5">
+            <!-- Aquí se cargarán los servicios -->
+          </div>
+    </div>
+    
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', async () => {
+          await loadServicios();
+        });
+      
+        // Función para cargar los servicios
+        async function loadServicios() {
+          try {
+            const response = await fetch('http://localhost:4321/api/servicios');
+            const data = await response.json();
+            const servicios = data.servicios;
+      
+            const container = document.getElementById('lista-servicios');
+            container.innerHTML = '';
+      
+            servicios.forEach(servicio => {
+              const servicioCard = document.createElement('div');
+              servicioCard.className = 'bg-white rounded-lg shadow p-4 mb-4';
+              servicioCard.innerHTML = `
+                <img src="${servicio.imagen}" alt="${servicio.nombre}" class="w-full h-48 object-cover rounded mb-2">
+                <h3 class="text-xl font-bold">${servicio.nombre}</h3>
+                <p class="text-gray-700">${servicio.descripcion}</p>
+                <p class="text-gray-700">${servicio.desglose}</p>              
+                `;
+              container.appendChild(servicioCard);
+            });
+      
+          } catch (error) {
+            console.error('Error al cargar los servicios:', error);
+          }
+        }
+    </script>
+</Layout>

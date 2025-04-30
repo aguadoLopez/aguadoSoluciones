@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+    <!-- Lista de Marcas de Productos-->
+    <div class="overflow-x-auto bg-white p-4 shadow-lg rounded-lg">
+        <h2 id="page-title" class="text-[25px] lg:text-[30px] text-black font-semibold mb-4">Productos</h2>
+          <div id="lista-productos" class="flex flex-wrap gap-5">
+            <!-- Aquí se cargarán los productos -->
+          </div>
+    </div>
+    
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', async () => {
+          await loadProductos();
+        });
+      
+        // Función para cargar los productos
+        async function loadProductos() {
+          try {
+            const response = await fetch('http://localhost:4321/api/marcasproductos');
+            const data = await response.json();
+            console.log(data);
+            const productos = data.marcasProductos;
+      
+            const container = document.getElementById('lista-productos');
+            container.innerHTML = '';
+      
+            productos.forEach(producto => {
+              const productoCard = document.createElement('div');
+              productoCard.className = 'bg-white rounded-lg shadow p-4 mb-4';
+              productoCard.innerHTML = `
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover rounded mb-2">            
+                `;
+              container.appendChild(productoCard);
+            });
+      
+          } catch (error) {
+            console.error('Error al cargar los productos:', error);
+          }
+        }
+    </script>
+</Layout>
