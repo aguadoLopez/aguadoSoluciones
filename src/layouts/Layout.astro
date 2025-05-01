@@ -1,3 +1,7 @@
+---
+import Menu from "../components/menu.astro"
+import Footer from "../components/footer.astro"
+---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -9,6 +13,8 @@
 	<title>Inicio de sesión</title>
 </head>
 <body class="bg-whitish min-h-screen flex flex-col">
+	<Menu></Menu>
 	<slot />
+	<Footer></Footer>
 </body>
 </html>
