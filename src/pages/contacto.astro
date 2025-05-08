@@ -2,6 +2,77 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+
 <Layout>
-    <h1>Contacto</h1>
+  <h1>Contacto</h1>
+  <form id="contact-form">
+    <label>
+        Nombre y apellidos:
+        <input type="text" name="nombre" required />
+      </label>
+      <label>
+        telefono:
+        <input type="text" name="telefono" required />
+      </label>
+    <label>
+      Tu correo:
+      <input type="email" name="email" required />
+    </label>
+    <label>
+      Producto o Servicio:
+      <input type="text" name="subject" required />
+    </label>
+    <label>
+      Mensaje:
+      <textarea name="message" required></textarea>
+    </label>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('status');
+
+        if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+
+  
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+  
+        const formData = new FormData(form);
+  
+        const data = {
+            nombre: formData.get('nombre'),
+            telefono: formData.get('telefono'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+  
+        try {
+          const response = await fetch('/api/resend', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+  
+          if (response.ok) {
+            status.textContent = 'Mensaje enviado correctamente.';
+            form.reset();
+          } else {
+            status.textContent = 'Error al enviar el mensaje.';
+          }
+        } catch (err) {
+          console.error(err);
+          status.textContent = 'Hubo un problema al enviar el mensaje.';
+        }
+      });
+    });
+  </script>
+  
 </Layout>
