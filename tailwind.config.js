@@ -4,7 +4,18 @@ export default {
     "./src/**/*.{astro,html,js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+				archivoBlack: ['Archivo Black', 'sans-serif'], 
+			  },
+      colors: {
+        "verde": "#007A33",
+        "blanco": "#F4EFEF",
+        "negro": "#171717",
+        "quaternary": "#4D4D4D",
+        "quinary": "#5E5E5E",        
+      }
+    },
   },
   plugins: [],
 }

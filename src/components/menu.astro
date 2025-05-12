@@ -1,8 +1,70 @@
-<div>
-    <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/servicios">Servicios</a></li>
-        <li><a href="/productos">Productos</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-    </ul>
+---
+const logo = "/img/logo.png";
+---
+<div class="flex items-center mt-10 gap-12">
+    <nav id="menu" class="flex w-10/12 h-16 ml-12 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-white shadow-md">
+        <!-- Izquierda: Botón de inicio o logo -->
+        <button id="inicioLogo" class="px-2 py-0.5 rounded-sm font-archivoBlack bg-verde text-xl font-black text-blanco">
+            <a href="/">INICIO</a>
+        </button>
+
+        <!-- Botón hamburguesa en móvil -->
+        <button id="hamburguesa" class="hidden text-verde text-3xl focus:outline-none">
+        ☰
+        </button>
+
+        <!-- Derecha: Menú principal -->
+        <ul id="paginas" class="flex mr-10 space-x-10 text-verde font-archivoBlack font-black text-lg">
+            <li><a href="/servicios">Servicios</a></li>
+            <li><a href="/productos">Productos</a></li>
+            <li><a href="/contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    <img id="logo" src={logo} alt="Logo" class="h-28 mr-12">
 </div>
+<!-- Menú desplegable móvil -->
+<div id="menuMovil" class="hidden absolute top-28 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-md p-4 z-50 space-y-4 w-10/12 text-verde font-black">
+    <a href="/servicios" class="block">Servicios</a>
+    <a href="/productos" class="block">Productos</a>
+    <a href="/contacto" class="block">Contacto</a>
+</div>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const isMobile = window.matchMedia('(max-width: 639px)').matches;
+        if (isMobile) {
+            const menu = document.getElementById('menu');
+            const left = document.getElementById('inicioLogo');
+            const hamburguesa = document.getElementById('hamburguesa');
+            const menuMovil = document.getElementById('menuMovil');
+            const paginas = document.getElementById('paginas');
+            const logo = document.getElementById('logo');
+            let abierto = false;
+
+            menu.classList.remove('ml-12');
+            menu.classList.add('mx-auto', 'mb-8');
+
+            // Sustituye "Inicio" por el logo
+            left.innerHTML = '';
+            console.log('logo path:', logo);
+            left.innerHTML = `<a href="/"><img src="/img/logo.png" alt="Logo" class="h-8"></a>`;
+            left.classList.remove('bg-verde');
+
+            // Sustituye páginas por menu hamburguesa
+            hamburguesa.classList.remove('hidden');
+            paginas.classList.add('hidden');
+
+
+            // Alternar visibilidad del menú al hacer clic
+            hamburguesa.addEventListener('click', () => {
+            abierto = !abierto;
+            hamburguesa.textContent = abierto ? '✖' : '☰';
+            menuMovil.classList.toggle('hidden');
+            paginas.classList.add('flex-col', 'bg-white', 'p-4', 'rounded', 'mt-2', 'gap-2');
+            });
+
+
+            logo.classList.add('hidden');
+        }
+    });
+</script>
