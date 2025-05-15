@@ -1,20 +1,30 @@
-<section id="carrusel" class="carousel-section bg-slate-500 h-44">
-  <div class="flex flex-row justify-center items-center md:gap-5 w-screen">
-    <button class="text-azul1 font-bold" id="prevBtn">
-      <span class="text-xl">&lt;</span>
+<section id="carrusel" class="carousel-section h-[66vh] mb-10">
+  <div class="relative w-screen h-full overflow-hidden">
+
+    <!-- Flechas superpuestas -->
+    <button class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-white" id="prevBtn">
+      ❮
+    </button>
+    <button class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-white" id="nextBtn">
+      ❯
     </button>
 
-    <div class="carousel-container md:w-[600px] w-3/5 overflow-hidden mx-8">
-      <div id="carousel-items" class="carousel-items flex transition-transform duration-300 ease-in-out">
-        <!-- Elementos del carrusel se insertan dinámicamente -->
+    <!--Aguado Soluciones -->
+    <div class="absolute left-8 top-24 left-0 md:top-36 md:left-12 lg:top-24 lg:left-24 z-10 text-center">
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-brigshotOne font-bold mb-0 md:mb-2 lg:mb-2 text-verde ">Aguado</h3>
+      <h3 class="text-xl md:text-2xl lg:text-4xl font-bold ml-24 md:ml-28 lg:ml-40 text-negro">Soluciones</h3>
+    </div>
+    
+    <!-- Contenedor del carrusel -->
+    <div class="carousel-container w-full h-full">
+      <div id="carousel-items" class="carousel-items flex h-full transition-transform duration-300 ease-in-out">
+        <!-- Elementos insertados dinámicamente -->
       </div>
     </div>
 
-    <button class="text-azul1 font-bold" id="nextBtn">
-      <span class="text-xl">&gt;</span>
-    </button>
   </div>
 </section>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -61,11 +71,9 @@
         .then(data => {
           const servicios = data.servicios;
           carouselItems.innerHTML = servicios.map(servicio => `
-            <div class="carousel-item flex-shrink-0 h-80 bg-center rounded-lg justify-center items-center flex"
+            <div class="carousel-item flex-shrink-0 h-[66vh] bg-[40%_center] md:bg-center rounded-lg flex justify-center items-center "
                  style="background-image: url('${servicio.imagen}'); background-size: cover;">
               <div class="text-center text-white">
-                <h3 class="text-3xl font-bold mb-2">Aguado</h3>
-                <h3 class="text-3xl font-bold mb-2">Soluciones</h3>
               </div>
             </div>
           `).join('');

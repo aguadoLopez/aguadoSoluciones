@@ -13,9 +13,11 @@ import Footer from "../components/footer.astro"
 
 	<title>Inicio de sesión</title>
 </head>
-<body class="bg-whitish min-h-screen flex flex-col">
+<body class="bg-blanco min-h-screen flex flex-col">
 	<Menu></Menu>
-	<slot />
+	<main class="flex-1">
+    	<slot />
+  	</main>
 	<Footer></Footer>
 </body>
 </html>

@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
 				archivoBlack: ['Archivo Black', 'sans-serif'], 
+        brigshotOne: ['Brigshot One'],
 			  },
       colors: {
         "verde": "#007A33",

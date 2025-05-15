@@ -1,8 +1,8 @@
 ---
 const logo = "/img/logo.png";
 ---
-<div class="flex items-center mt-10 gap-12">
-    <nav id="menu" class="flex w-10/12 h-16 ml-12 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-white shadow-md">
+<div class="flex items-center justify-between mx-[2%] md:mt-12 lg:mt-4 mb-8">
+    <nav id="menu" class="flex md:w-10/12 lg:w-[88%] lg:h-16 md:h-20 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-white shadow-md">
         <!-- Izquierda: Botón de inicio o logo -->
         <button id="inicioLogo" class="px-2 py-0.5 rounded-sm font-archivoBlack bg-verde text-xl font-black text-blanco">
             <a href="/">INICIO</a>
@@ -20,7 +20,7 @@ const logo = "/img/logo.png";
             <li><a href="/contacto">Contacto</a></li>
         </ul>
     </nav>
-    <img id="logo" src={logo} alt="Logo" class="h-28 mr-12">
+    <img id="logo" src={logo} alt="Logo" class="hidden md:block md:w-24 lg:w-28">
 </div>
 <!-- Menú desplegable móvil -->
 <div id="menuMovil" class="hidden absolute top-28 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-md p-4 z-50 space-y-4 w-10/12 text-verde font-black">
@@ -29,7 +29,70 @@ const logo = "/img/logo.png";
     <a href="/contacto" class="block">Contacto</a>
 </div>
 
+
+
 <script is:inline>
+    function aplicarVistaMovil() {
+        const isMobile = window.innerWidth <= 639;
+        const menu = document.getElementById('menu');
+        const left = document.getElementById('inicioLogo');
+        const hamburguesa = document.getElementById('hamburguesa');
+        const menuMovil = document.getElementById('menuMovil');
+        const paginas = document.getElementById('paginas');
+        const logo = document.getElementById('logo');
+
+       if (!menu || !left || !hamburguesa || !menuMovil || !paginas || !logo) return;
+
+        if (isMobile) {
+            let abierto = false;
+
+            menu.classList.remove('h-28');
+            menu.classList.add('mx-[2%]', 'mb-8', 'mt-4', 'h-20', 'w-11/12');
+
+            // Sustituye "Inicio" por el logo
+            left.innerHTML = `<a href="/"><img src="/img/logo.png" alt="Logo" class="h-8"></a>`;
+            left.classList.remove('bg-verde');
+
+            // Mostrar hamburguesa y ocultar el menú normal
+            hamburguesa.classList.remove('hidden');
+            paginas.classList.add('hidden');
+            // logo.classList.add('hidden');
+
+            // Alternar visibilidad del menú móvil
+            hamburguesa.addEventListener('click', () => {
+                abierto = !abierto;
+                hamburguesa.textContent = abierto ? '🞩' : '☰';
+                menuMovil.classList.toggle('hidden');
+            });
+        } 
+        // else {
+        //     // Revertir a modo escritorio
+        //     menu.classList.remove('mb-8', 'mt-4', 'h-20', 'w-11/12');
+        //     menu.classList.add('h-28');
+
+        //     left.innerHTML = `<a href="/" class="text-blanco">INICIO</a>`;
+        //     left.classList.add('bg-verde');
+
+        //     hamburguesa.classList.add('hidden');
+        //     paginas.classList.remove('hidden');
+        //     logo.classList.remove('hidden');
+        //     menuMovil.classList.add('hidden');
+        // }
+    }
+    
+
+    // Ejecutar inmediatamente
+    window.addEventListener('load', aplicarVistaMovil);
+
+    // Y si cambia el tamaño de la pantalla después
+    window.addEventListener('resize', aplicarVistaMovil);
+
+        console.log("window",window.innerWidth);
+
+</script>
+
+
+<!-- <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
         const isMobile = window.matchMedia('(max-width: 639px)').matches;
         if (isMobile) {
@@ -58,7 +121,7 @@ const logo = "/img/logo.png";
             // Alternar visibilidad del menú al hacer clic
             hamburguesa.addEventListener('click', () => {
             abierto = !abierto;
-            hamburguesa.textContent = abierto ? '✖' : '☰';
+            hamburguesa.textContent = abierto ? '🞩' : '☰';
             menuMovil.classList.toggle('hidden');
             paginas.classList.add('flex-col', 'bg-white', 'p-4', 'rounded', 'mt-2', 'gap-2');
             });
@@ -67,4 +130,4 @@ const logo = "/img/logo.png";
             logo.classList.add('hidden');
         }
     });
-</script>
+</script> -->
