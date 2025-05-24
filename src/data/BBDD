@@ -1,3 +1,21 @@
+CREATE DATABASE aguado;
+USE aguado;
+
+CREATE TABLE servicios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    desglose TEXT NOT NULL,
+    imagen VARCHAR(255)
+);
+
+CREATE TABLE marcasproductos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    imagen VARCHAR(255)
+);
+
+
 INSERT INTO servicios (nombre, descripcion, desglose, imagen)
 VALUES
 (
@@ -42,7 +60,7 @@ VALUES
   Instalación de paneles solares fotovoltaicos
   Integración con la red eléctrica y baterías
   Mantenimiento preventivo y correctivo',
-  '/img/placasSolares.webp'
+  '/img/placasSolares.jpg'
 );
 INSERT INTO marcasproductos (nombre, imagen)
 VALUES
