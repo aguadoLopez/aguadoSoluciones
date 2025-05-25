@@ -32,9 +32,32 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Clean Azure App Service folder
+        uses: azure/webapps-deploy@v3
+        with:
+            app-name: 'aguadoapp'
+            slot-name: 'Production'
+            package: ''
+            clean: true
+
+      - name: Show package.json before deploy
+        run: cat package.json
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'aguadoapp'
           slot-name: 'Production'
           package: ./dist
+
+      - name: Restart Azure Web App
+        uses: azure/cli@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az webapp restart --name aguadoapp --resource-group aguadoGroup
+        env:
+            AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+            AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+            AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+            AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
