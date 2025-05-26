@@ -31,9 +31,10 @@ jobs:
         run: |
           ls -R dist || echo "No se encontró dist"
 
-      - name: Add package.json to dist
+      - name: Copy necessary files to dist for Azure deployment
         run: |
-          echo '{ "type": "module", "main": "./server/entry.mjs", "scripts": { "start": "node ./server/entry.mjs" } }' > dist/package.json
+          cp package.json dist/
+          cp -r node_modules dist/
 
       - name: Azure Login
         uses: azure/login@v1
@@ -47,9 +48,3 @@ jobs:
           slot-name: 'Production'
           package: ./dist
           clean: true
-
-        env:
-            AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-            AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-            AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
