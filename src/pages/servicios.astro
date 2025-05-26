@@ -19,7 +19,7 @@ import Layout from "../layouts/Layout.astro";
         // Función para cargar los servicios
         async function loadServicios() {
           try {
-            const response = await fetch('/api/servicios');
+            const response = await fetch('http://localhost:4321/api/servicios');
             const data = await response.json();
             const servicios = data.servicios;
       
