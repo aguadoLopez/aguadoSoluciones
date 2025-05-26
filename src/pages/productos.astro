@@ -19,7 +19,7 @@ import Layout from "../layouts/Layout.astro";
         // Función para cargar los productos
         async function loadProductos() {
           try {
-            const response = await fetch('http://localhost:4321/api/marcasproductos');
+            const response = await fetch('/api/marcasproductos');
             const data = await response.json();
             console.log(data);
             const productos = data.marcasProductos;
