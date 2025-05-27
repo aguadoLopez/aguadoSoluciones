@@ -1,8 +1,8 @@
 // server.js (en raíz del proyecto)
 import { startServer } from './dist/server/entry.mjs';
 
-const PORT = process.env.PORT || 4321;
+const PORT = 4321;
 
-startServer({ port: PORT });
+startServer({ port: 4321 });
 
-console.log(`http://localhost:${PORT}`);
+console.log(`http://localhost:4321`);
