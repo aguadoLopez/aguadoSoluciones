@@ -7,7 +7,7 @@
     "build": "astro build",
     "astro": "astro",
     "preview": "astro preview",
-    "start": "node -e \"process.env.PORT=process.env.PORT || '8080'; require('./dist/server/entry.mjs')\""
+    "start": "node --input-type=module -e \"process.env.PORT = process.env.PORT || '8080'; import('./dist/server/entry.mjs')\""
   },
   "dependencies": {
     "@astrojs/node": "^9.2.2",

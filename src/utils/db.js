@@ -12,6 +12,9 @@ export const db = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: true
+  }
 });
 // // Cargar las variables de entorno desde el archivo .env
 // dotenv.config();
