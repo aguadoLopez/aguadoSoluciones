@@ -13,6 +13,7 @@ export const db = mysql.createPool({
     rejectUnauthorized: true
   },
   waitForConnections: true,
+  // necesario ssl? no lo se
   connectionLimit: 10,
   queueLimit: 0,});
 // // Cargar las variables de entorno desde el archivo .env
