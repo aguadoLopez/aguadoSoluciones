@@ -1,8 +1,9 @@
-// server.js (en raíz del proyecto)
-import { startServer } from './dist/server/entry.mjs';
+// server.js
+import { handler } from './dist/server/entry.mjs';
+import { createServer } from 'http';
 
-const PORT = 4321;
+const PORT = process.env.PORT || 3000;
 
-startServer({ port: 4321 });
-
-console.log(`http://localhost:4321`);
+createServer(handler).listen(PORT, () => {
+  console.log(`🚀 Server listening on http://localhost:${PORT}`);
+});
