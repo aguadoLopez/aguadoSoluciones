@@ -84,9 +84,14 @@ npm install
 
 ## 📄 Documentación Técnica
 
-Puedes consultar la documentación técnica completa, que incluye diagramas UML, diseño de base de datos, arquitectura del sistema y casos de prueba, en el siguiente enlace:
+Puedes consultar la documentación técnica completa, que incluye diagramas UML, diseño de base de datos, arquitectura del sistema y casos de prueba, en el siguiente enlace: [https://github.com/lunaMerino/aguadoDocu](https://github.com/lunaMerino/aguadoDocu)
 
-👉 [Ver documentación (PDF/Drive)](https://enlace-a-documentacion)
+👉 La documentación aún no está desplegada online, pero puedes visualizarla localmente siguiendo estos pasos:
+```bash
+cd docs
+npm install
+npm run dev
+```
 
 ---
 
@@ -119,6 +124,6 @@ Este proyecto está bajo la licencia **MIT**. Puedes reutilizar y modificar este
 
 ## 📬 Contacto
 
-**Nombre Apellido1 Apellido2**  
+**María Luna García-Arcicóllar Merino**  
 📧 Correo: lunagmerino@gmail.com  
 🌐 GitHub: [https://https://github.com/lunaMerino](https://https://github.com/lunaMerino)
