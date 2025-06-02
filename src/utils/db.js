@@ -2,31 +2,20 @@
 import mysql from 'mysql2/promise';
 import 'dotenv/config';  // Importa dotenv
 
+// variable de vite que indica si estamos en desarrollo
+const isDev = import.meta.env.DEV;
 
-export const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
-  ssl: {
-    rejectUnauthorized: true
-  },
+const dbConfig = {
+  host: isDev ? 'localhost' : import.meta.env.DB_HOST,
+  user: isDev ? import.meta.env.DB_USER_DEV : import.meta.env.DB_USER,
+  password: isDev ? import.meta.env.DB_PASSWORD_DEV : import.meta.env.DB_PASSWORD,
+  database: import.meta.env.DB_DATABASE,
+  port: Number(import.meta.env.DB_PORT),
+  ssl: isDev ? false : { rejectUnauthorized: true },
   waitForConnections: true,
-  // necesario ssl? no lo se
   connectionLimit: 10,
-  queueLimit: 0,});
-// // Cargar las variables de entorno desde el archivo .env
-// dotenv.config();
+  queueLimit: 0,
+};
 
 
-// // Función para crear y devolver una conexión a la base de datos
-// export async function getDbConnection() {
-//   const conn = await mysql.createConnection({
-//     host: process.env.DB_HOST,      // Usa las variables de entorno
-//     user: process.env.DB_USER,      // Usa las variables de entorno
-//     password: process.env.DB_PASSWORD, // Usa las variables de entorno
-//     database: process.env.DB_DATABASE, // Usa las variables de entorno
-//   });
-//   return conn;
-// }
+export const db = mysql.createPool(dbConfig);
