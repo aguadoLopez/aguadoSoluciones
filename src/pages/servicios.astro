@@ -14,7 +14,41 @@ import Layout from "../layouts/Layout.astro";
     <script type="module">
         document.addEventListener('DOMContentLoaded', async () => {
           await loadServicios();
+          aplicarVistaMovil();
         });
+
+        function aplicarVistaMovil() {
+          const isMobile = window.innerWidth <= 639;
+          if (isMobile) {
+            document.querySelectorAll('.servicio-card').forEach(card => {
+              card.classList.add(
+                'w-[90%]',
+                'mx-auto',
+                'mb-5',
+                'flex',
+                'flex-col',
+                'items-center',
+                'justify-center'
+              );
+            });
+          } else {
+            document.querySelectorAll('.servicio-card').forEach((card, index) => {
+
+              if (index % 2 === 0) {
+                card.classList.add('flex-row');
+                card.classList.remove('flex-row-reverse');
+              } else {
+                card.classList.add('flex-row-reverse');
+                card.classList.remove('flex-row');
+              }
+
+              const img = card.querySelector('img');
+              if (img) {
+                img.classList.add('w-3/4', 'h-auto', 'rounded-lg');
+              }
+            });
+          }
+        }
       
         // Función para cargar los servicios
         async function loadServicios() {
@@ -28,13 +62,26 @@ import Layout from "../layouts/Layout.astro";
       
             servicios.forEach(servicio => {
               const servicioCard = document.createElement('div');
-              servicioCard.className = 'bg-white rounded-lg shadow p-4 mb-4';
+              const desgloseFormateado = servicio.desglose
+                .split('.')
+                .filter(linea => linea.trim() !== '')
+                .map(linea => linea.trim() + '.')
+                .join('<br>');
+              servicioCard.className = 'servicio-card flex md:w-[85%] lg:w-[70%] mx-auto mb-8 bg-orange-100';
               servicioCard.innerHTML = `
-                <img src="${servicio.imagen}" alt="${servicio.nombre}" class="w-full h-48 object-cover rounded mb-2">
-                <h3 class="text-xl font-bold">${servicio.nombre}</h3>
-                <p class="text-gray-700">${servicio.descripcion}</p>
-                <p class="text-gray-700">${servicio.desglose}</p>              
-                `;
+                <div class="w-[40%]">
+                  <img src="${servicio.imagen}" alt="${servicio.nombre}" class="object-cover rounded-sm">
+                </div>
+                <div class="w-[60%] bg-slate-400">
+                  <h3 class="text-xl font-archivoBlack uppercase font-black text-verde">${servicio.nombre}</h3>
+                  <p class="text-negro font-archivoBlack">${servicio.descripcion}</p>
+                  <p class="text-verde font-archivoBlack font-bold">Servicios destacados:</p>
+                  <p class="text-negro font-archivoBlack">${desgloseFormateado}</p>
+                  <a href="/servicios" class="bg-green-600 text-white font-archivoBlack font-bold text-md rounded-full px-6 py-3 inline-block text-center">
+                    SOLICITAR VALORACIÓN
+                  </a>
+                </div>
+                  `;
               container.appendChild(servicioCard);
             });
       
@@ -42,5 +89,6 @@ import Layout from "../layouts/Layout.astro";
             console.error('Error al cargar los servicios:', error);
           }
         }
+        
     </script>
 </Layout>
