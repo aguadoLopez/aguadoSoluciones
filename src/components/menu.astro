@@ -1,8 +1,8 @@
 ---
 const logo = "/img/logo.png";
 ---
-<div class="flex items-center justify-between mx-[4%] md:mt-12 lg:mt-4 mb-8">
-    <nav id="menu" class="flex md:w-10/12 lg:w-[88%] lg:h-16 md:h-20 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-white shadow-md">
+<div class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between mx-[4%] md:mt-12 lg:mt-4 mb-8">
+    <nav id="menu" class="flex md:w-10/12 lg:w-[88%] lg:h-16 md:h-20 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-blanco shadow-md">
         <!-- Izquierda: Botón de inicio o logo -->
         <button id="inicioLogo" class="px-2 py-0.5 rounded-sm font-archivoBlack bg-verde text-xl font-black text-blanco">
             <a href="/">INICIO</a>
@@ -23,7 +23,7 @@ const logo = "/img/logo.png";
     <img id="logo" src={logo} alt="Logo" class="hidden md:block md:w-24 lg:w-28">
 </div>
 <!-- Menú desplegable móvil -->
-<div id="menuMovil" class="hidden absolute top-28 left-1/2 transform -translate-x-1/2 bg-white shadow-lg rounded-md p-4 z-50 space-y-4 w-10/12 text-verde font-black">
+<div id="menuMovil" class="hidden absolute top-28 left-1/2 transform -translate-x-1/2 bg-blanco shadow-lg rounded-md p-4 z-50 space-y-4 w-10/12 text-verde font-black">
     <a href="/servicios" class="block">Servicios</a>
     <a href="/productos" class="block">Productos</a>
     <a href="/contacto" class="block">Contacto</a>

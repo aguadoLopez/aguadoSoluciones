@@ -4,43 +4,53 @@ import Layout from '../layouts/Layout.astro';
 
 
 <Layout>
-  <div class="relative h-screen w-full overflow-hidden">
-  <img src="/img/ladrillos.jpg" alt="fondo" class="w-full h-screen object-cover absolute inset-0 z-0">
-  <div class="relative z-10 p-8 text-white">
-    <h1 class="text-3xl text-verde font-bold mb-2">Contáctanos</h1>
-    <p class="mb-6">No dude en pedir presupuesto de nuestros productos y servicios o de consultar sus dudas</p>
-  </div>
-  <div class=" absolute left-1/2 -translate-x-1/2 transform md:left-3/5 md:translate-x-0 lg:left-2/3 lg:translate-x-0 md:top-1/2 md:-translate-y-1/2 z-10 border-2 border-gray-300 rounded-md p-4 ">
-    <form id="contact-form">
-      <label style="display: block;">
-        Nombre y apellidos:
-      </label>
-        <input type="text" name="nombre" required />
-      <label style="display: block;">
-        telefono:
-      </label>
-        <input type="text" name="telefono" required />
-      <label style="display: block;">
-        Tu correo:
-      </label>
-        <input type="email" name="email" required />
-      <label style="display: block;">
-        Producto o Servicio:
-      </label>
-        <input type="text" name="subject" required />
-      <label style="display: block;">
-        Mensaje:
-      </label>
-        <textarea style="display: block;" name="message" required></textarea>
-      <button class="bg-verde text-blanco p-2 rounded-full" type="submit">Enviar</button>
-    </form>
-  </div>
+  <div class="relative h-screen md:h-[80vh] w-full overflow-hidden">
+    <div class="absolute lg:top-0 md:top-[40%] top-[60%] right-0 z-0 lg:w-[40%] md:w-full sm:w-full lg:h-screen md:h-[40vh] overflow-hidden">
+      <img src="/img/ladrillos.jpg" alt="fondo" class="h-full w-full object-cover object-top">
+    </div>
+    <div class="relative md:top-[5%] top-[0%] left-[6%] z-10 px-6 text-blanco">
+      <h1 class="text-3xl text-verde font-bold mb-2">Contáctanos</h1>
+      <p class="mb-6 md:text-lg text-sm text-negro">No dude en pedir presupuesto de nuestros <br> productos y servicios o de consultar sus dudas</p>
+    </div>
+    <div class="absolute lg:left-[60%] md:left-1/2 md:-translate-x-1/2 left-1/2 -translate-x-1/2 lg:top-[20%] md:top-[25%] z-10 2xl:w-1/3 md:w-1/2 w-[80%] border-2 border-gray-300 bg-blanco opacity-85 rounded-sm px-12 pt-8 pb-4">
+      <form id="contact-form">
+        <label style="display: block;">
+          Nombre y apellidos:
+        </label>
+          <input type="text" name="nombre" class="bg-gray-400 w-full rounded-sm p-2" required />
+        <label style="display: block;">
+          telefono:
+        </label>
+          <input type="text" name="telefono" class="bg-gray-400 w-full rounded-sm p-2" required />
+        <label style="display: block;">
+          Tu correo:
+        </label>
+          <input type="email" name="email" class="bg-gray-400 w-full rounded-sm p-2"  required />
+        <label style="display: block;">
+          Producto o Servicio:
+        </label>
+          <input type="text" name="subject" class="bg-gray-400 w-full rounded-sm p-2" required />
+        <label style="display: block;">
+          Mensaje:
+        </label>
+          <textarea style="display: block;" name="message" class="bg-gray-400 w-full rounded-sm p-2" required></textarea>
+        <button class="bg-verde text-blanco px-4 py-1 rounded-full mt-2" type="submit">Enviar</button>
+      </form>
+    </div>
   </div>
 
   <p id="status"></p>
 
   <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
+
+      const params = new URLSearchParams(window.location.search);
+      const servicio = params.get('servicio');
+  
+      if (servicio) {
+        const subjectInput = document.querySelector('input[name="subject"]');
+        if (subjectInput) subjectInput.value = servicio;
+      }
         const form = document.getElementById('contact-form');
         const status = document.getElementById('status');
 

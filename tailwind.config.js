@@ -11,10 +11,8 @@ export default {
 			  },
       colors: {
         "verde": "#007A33",
-        "blanco": "#F3F2EF",
-        "negro": "#171717",
-        "quaternary": "#4D4D4D",
-        "quinary": "#5E5E5E",        
+        "blanco": "#FFFEFC",
+        "negro": "#171717",       
       }
     },
   },

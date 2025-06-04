@@ -4,9 +4,10 @@ import Layout from "../layouts/Layout.astro";
 
 <Layout>
     <!-- Lista de Marcas de Productos-->
-    <div class="overflow-x-auto bg-white p-4 shadow-lg rounded-lg">
-        <h2 id="page-title" class="text-[25px] lg:text-[30px] text-black font-semibold mb-4">Productos</h2>
-          <div id="lista-productos" class="flex flex-wrap gap-5">
+    <div class="bg-blanco p-4 pb-[9%]">
+        <h2 id="page-title" class="text-[25px] lg:text-[30px] text-center text-black font-archivoBlack font-semibold mt-4 mb-4">PRODUCTOS</h2>
+        <h2 id="page-title" class="text-[15px] lg:text-[20px] text-black font-archivoBlack t-4 ml-[15%] mb-4">MARCAS:</h2>
+          <div id="lista-productos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 px-[15%] gap-x-2 gap-y-6">
             <!-- Aquí se cargarán los productos -->
           </div>
     </div>
@@ -29,9 +30,9 @@ import Layout from "../layouts/Layout.astro";
       
             productos.forEach(producto => {
               const productoCard = document.createElement('div');
-              productoCard.className = 'bg-white rounded-lg shadow p-4 mb-4';
+              productoCard.classList.add('bg-blanco', 'p-4', 'shadow', 'rounded', 'aspect-[4/3]', 'flex', 'items-center', 'justify-center');
               productoCard.innerHTML = `
-                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover rounded mb-2">            
+                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-[90%] h-[90%] object-contain object-center overflow-hidden">            
                 `;
               container.appendChild(productoCard);
             });
