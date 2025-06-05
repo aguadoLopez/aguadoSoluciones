@@ -7,7 +7,7 @@ class Servicios {
         this.imagen = imagen;
     }
 
-    // Método estático para crear un objeto Course a partir de los datos que tenemos en la base de datos
+    // Método estático para crear un objeto Servicios a partir de los datos que tenemos en la base de datos
     static fromDatabase(data) {
         return new Servicios(
             data.id,
@@ -18,7 +18,7 @@ class Servicios {
         );
     }
 
-    // Este método convierte el objeto Course a formato JSON
+    // Este método convierte el objeto Servicios a formato JSON
     toJSON() {
         return {
             id: this.id,

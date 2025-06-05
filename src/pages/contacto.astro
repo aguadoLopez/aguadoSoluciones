@@ -4,32 +4,44 @@ import Layout from '../layouts/Layout.astro';
 
 
 <Layout>
+  {/* Contenedor principal con posición relativa para controlar el diseño */}
   <div class="relative h-screen md:h-[80vh] w-full overflow-hidden">
+
+    {/* Imagen de fondo posicionada absolutamente para cubrir parte de la pantalla */}
     <div class="absolute lg:top-0 md:top-[40%] top-[60%] right-0 z-0 lg:w-[40%] md:w-full sm:w-full lg:h-screen md:h-[40vh] overflow-hidden">
       <img src="/img/ladrillos.jpg" alt="fondo" class="h-full w-full object-cover object-top">
     </div>
+
+    {/* Texto principal con título y descripción */}
     <div class="relative md:top-[5%] top-[0%] left-[6%] z-10 px-6 text-blanco">
       <h1 class="text-3xl text-verde font-bold mb-2">Contáctanos</h1>
       <p class="mb-6 md:text-lg text-sm text-negro">No dude en pedir presupuesto de nuestros <br> productos y servicios o de consultar sus dudas</p>
     </div>
+
+    {/* Formulario de contacto posicionado encima del fondo */}
     <div class="absolute lg:left-[60%] md:left-1/2 md:-translate-x-1/2 left-1/2 -translate-x-1/2 lg:top-[20%] md:top-[25%] z-10 2xl:w-1/3 md:w-1/2 w-[80%] border-2 border-gray-300 bg-blanco opacity-85 rounded-sm px-12 pt-8 pb-4">
       <form id="contact-form">
+        {/* Campo para nombre y apellidos */}
         <label style="display: block;">
           Nombre y apellidos:
         </label>
           <input type="text" name="nombre" class="bg-gray-400 w-full rounded-sm p-2" required />
+        {/* Campo para teléfono */}
         <label style="display: block;">
           telefono:
         </label>
           <input type="text" name="telefono" class="bg-gray-400 w-full rounded-sm p-2" required />
+        {/* Campo para correo electrónico */}
         <label style="display: block;">
           Tu correo:
         </label>
           <input type="email" name="email" class="bg-gray-400 w-full rounded-sm p-2"  required />
+        {/* Campo para producto o servicio */}
         <label style="display: block;">
           Producto o Servicio:
         </label>
           <input type="text" name="subject" class="bg-gray-400 w-full rounded-sm p-2" required />
+        {/* Campo para mensaje */}
         <label style="display: block;">
           Mensaje:
         </label>
@@ -39,14 +51,17 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 
+  {/* Contenedor para mostrar el estado del envío del formulario */}
   <p id="status"></p>
 
   <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
 
+      // Obtener el parámetro 'servicio' de la URL (si existe)
       const params = new URLSearchParams(window.location.search);
       const servicio = params.get('servicio');
   
+      // Si se recibe un servicio en la URL, asignarlo al campo 'subject' del formulario
       if (servicio) {
         const subjectInput = document.querySelector('input[name="subject"]');
         if (subjectInput) subjectInput.value = servicio;
@@ -54,12 +69,14 @@ import Layout from '../layouts/Layout.astro';
         const form = document.getElementById('contact-form');
         const status = document.getElementById('status');
 
+        // Validar que los elementos existen y tienen el tipo esperado. Neceario porque astro no los reconoce (TypeScript)
         if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
 
   
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
   
+        // Recoger los datos del formulario usando FormData y construimos un objeto con ellos
         const formData = new FormData(form);
   
         const data = {
@@ -71,6 +88,7 @@ import Layout from '../layouts/Layout.astro';
         };
   
         try {
+          // Enviar los datos por POST al endpoint /api/resend
           const response = await fetch('/api/resend', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -79,6 +97,7 @@ import Layout from '../layouts/Layout.astro';
             }
           });
   
+          // Mensaje y manejo de errores
           if (response.ok) {
             status.textContent = 'Mensaje enviado correctamente.';
             form.reset();

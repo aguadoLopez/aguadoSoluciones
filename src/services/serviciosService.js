@@ -15,7 +15,6 @@ export const getAllServicios = async (page, limit) => {
       // Hacemos la consulta a la base de datos para obtener los servicios con paginación
       const [result] = await db.query('SELECT * FROM aguado.servicios LIMIT ? OFFSET ?', [limit, offset]);
       
-      // Verificación de que el resultado es un array
       if (!Array.isArray(result)) {
         throw new Error('The query result is not an array');
       }
@@ -27,7 +26,6 @@ export const getAllServicios = async (page, limit) => {
       const [countResult] = await db.query('SELECT COUNT(*) AS total FROM aguado.servicios');
       const totalServicios = countResult[0].total;
   
-      // Devolvemos los servicios y el total de servicios
       return { servicios, totalServicios};
   
     } catch (error) {

@@ -1,4 +1,4 @@
-<section id="carrusel" class="carousel-section h-[66vh] mb-10">
+<section id="carrusel" class="carousel-section h-[66vh] mb-14">
   <div class="relative w-screen h-full overflow-hidden">
 
     <!-- Flechas superpuestas -->
@@ -30,61 +30,104 @@
   document.addEventListener('DOMContentLoaded', function () {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const carouselItems = document.getElementById('carousel-items');
-    const container = document.querySelector('.carousel-container') as HTMLElement;
+    const carouselItems = document.getElementById('carousel-items') as HTMLElement | null;
+    const container = document.querySelector('.carousel-container') as HTMLElement | null;
 
-
-    let currentIndex = 0;
+    let currentIndex = 1; // Inicia en el primer slide real
+    let autoplayInterval: number;
 
     function updateCarousel() {
-      if (container instanceof HTMLElement && carouselItems instanceof HTMLElement) {
+      if (!container || !carouselItems) return;
+
+      const width = container.offsetWidth;
+      const itemCount = carouselItems.children.length;
+
+      carouselItems.style.transition = 'transform 0.3s ease-in-out';
+      carouselItems.style.transform = `translateX(-${currentIndex * width}px)`;
+
+      setTimeout(() => {
+        if (!carouselItems || !container) return;
+
+        // Saltar al primer o último duplicado sin transición
         const width = container.offsetWidth;
-        carouselItems.style.transform = `translateX(-${currentIndex * width}px)`;
-      }
+        if (currentIndex === itemCount - 1) {
+          carouselItems.style.transition = 'none';
+          currentIndex = 1;
+          carouselItems.style.transform = `translateX(-${currentIndex * width}px)`;
+        } else if (currentIndex === 0) {
+          carouselItems.style.transition = 'none';
+          currentIndex = itemCount - 2;
+          carouselItems.style.transform = `translateX(-${currentIndex * width}px)`;
+        }
+      }, 300);
+    }
+
+    function startAutoplay() {
+      autoplayInterval = window.setInterval(() => {
+        currentIndex++;
+        updateCarousel();
+      }, 8000);
+    }
+
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      startAutoplay();
     }
 
     if (prevBtn && nextBtn && carouselItems && container) {
       prevBtn.addEventListener('click', () => {
-        const itemCount = carouselItems.children.length;
-        currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+        currentIndex--;
         updateCarousel();
+        resetAutoplay();
       });
 
       nextBtn.addEventListener('click', () => {
-        const itemCount = carouselItems.children.length;
-        currentIndex = (currentIndex + 1) % itemCount;
+        currentIndex++;
         updateCarousel();
+        resetAutoplay();
       });
 
       window.addEventListener('resize', () => {
-        // Reajustar tamaños al cambiar el ancho de la ventana
         const containerWidth = container.offsetWidth;
         document.querySelectorAll('.carousel-item').forEach(item => {
-          (item as HTMLElement).style.width = `${containerWidth}px`;
+          if (item instanceof HTMLElement) {
+            item.style.width = `${containerWidth}px`;
+          }
         });
         updateCarousel();
       });
 
-      // Cargar contenido dinámicamente
+      // Cargar contenido dinámico
       fetch(`/api/servicios?page=1&limit=5`)
         .then(response => response.json())
         .then(data => {
           const servicios = data.servicios;
-          carouselItems.innerHTML = servicios.map(servicio => `
-            <div class="carousel-item flex-shrink-0 h-[66vh] bg-[40%_center] md:bg-center rounded-lg flex justify-center items-center "
+
+          if (!carouselItems) return;
+
+          // Duplicar último al inicio y primero al final
+          const duplicados = [
+            servicios[servicios.length - 1],
+            ...servicios,
+            servicios[0],
+          ];
+
+          carouselItems.innerHTML = duplicados.map(servicio => `
+            <div class="carousel-item flex-shrink-0 h-[66vh] bg-[40%_center] md:bg-center rounded-lg flex justify-center items-center"
                  style="background-image: url('${servicio.imagen}'); background-size: cover;">
-              <div class="text-center text-blanco">
-              </div>
             </div>
           `).join('');
 
-          // Asegurar que cada item tenga el mismo ancho que el contenedor
           const containerWidth = container.offsetWidth;
           document.querySelectorAll('.carousel-item').forEach(item => {
-            (item as HTMLElement).style.width = `${containerWidth}px`;
+            if (item instanceof HTMLElement) {
+              item.style.width = `${containerWidth}px`;
+            }
           });
 
+          currentIndex = 1;
           updateCarousel();
+          startAutoplay();
         });
     }
   });

@@ -12,6 +12,7 @@ import Layout from "../layouts/Layout.astro";
     </div>
     
     <script type="module">
+      // Cuando el DOM esté cargado, cargamos los servicios y aplicamos los estilos según el dispositivo
         document.addEventListener('DOMContentLoaded', async () => {
           await loadServicios();
           aplicarVistaMovil();
@@ -20,6 +21,7 @@ import Layout from "../layouts/Layout.astro";
         function aplicarVistaMovil() {
           const isMobile = window.innerWidth <= 639;
           if (isMobile) {
+            // Ajustes visuales para dispositivos móviles
             document.querySelectorAll('.servicio-card').forEach(card => {
               card.classList.add(
                 'w-full',
@@ -67,6 +69,7 @@ import Layout from "../layouts/Layout.astro";
               );
             });
           } else {
+            // Ajustes para pantallas grandes: alternar posición de imagen y texto
             document.querySelectorAll('.servicio-card').forEach((card, index) => {
 
               if (index % 2 === 0) {
@@ -85,7 +88,7 @@ import Layout from "../layouts/Layout.astro";
           }
         }
       
-        // Función para cargar los servicios
+        // Función para cargar los servicios desde API
         async function loadServicios() {
           try {
             const response = await fetch('/api/servicios');
@@ -95,6 +98,7 @@ import Layout from "../layouts/Layout.astro";
             const container = document.getElementById('lista-servicios');
             container.innerHTML = '';
       
+            // Formateamos desglose como lista
             servicios.forEach(servicio => {
               const servicioCard = document.createElement('div');
               const desgloseFormateado = servicio.desglose
@@ -102,7 +106,7 @@ import Layout from "../layouts/Layout.astro";
                 .filter(linea => linea.trim() !== '')
                 .map(linea => `• ${linea.trim()}.`)
                 .join('<br>');
-              servicioCard.className = 'servicio-card flex md:w-[85%] lg:w-[70%] mx-auto mb-20';
+              servicioCard.className = 'servicio-card flex md:w-[85%] lg:w-[70%] mx-auto mb-24';
               servicioCard.innerHTML = `
                 <div class="image w-[50%] flex items-center">
                   <img src="${servicio.imagen}" alt="${servicio.nombre}" class="object-cover rounded-sm">

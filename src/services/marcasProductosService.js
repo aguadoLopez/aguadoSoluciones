@@ -15,7 +15,6 @@ export const getAllMarcasProductos = async (page, limit) => {
       // Hacemos la consulta a la base de datos para obtener las marcas de productos con paginación
       const [result] = await db.query('SELECT * FROM aguado.marcasproductos LIMIT ? OFFSET ?', [limit, offset]);
       
-      // Verificación de que el resultado es un array
       if (!Array.isArray(result)) {
         throw new Error('The query result is not an array');
       }
@@ -27,7 +26,6 @@ export const getAllMarcasProductos = async (page, limit) => {
       const [countResult] = await db.query('SELECT COUNT(*) AS total FROM aguado.marcasproductos');
       const totalMarcasProductos = countResult[0].total;
   
-      // Devolvemos las marcas de productos y el total de marcas de productos
       return { marcasProductos, totalMarcasProductos};
   
     } catch (error) {
