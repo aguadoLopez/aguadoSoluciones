@@ -1,4 +1,6 @@
-import dotenv from 'dotenv';  // Importa dotenvAdd commentMore actions
+// src/lib/db.js
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';  // Importa dotenv
 
 
 export const db = mysql.createPool({
