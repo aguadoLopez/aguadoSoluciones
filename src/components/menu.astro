@@ -1,7 +1,9 @@
 ---
 const logo = "/img/logo.png";
 ---
-<div class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between mx-[4%] md:mt-12 lg:mt-4 mb-8">
+<div class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[4%] 
+            md:pt-12 lg:pt-4 before:content-[''] before:absolute before:inset-0 
+            lg:before:h-[85%] md:before:h-[95%] before:h-[90%] before:bg-white before:z-[-1]">
     <nav id="menu" class="flex md:w-10/12 lg:w-[90%] lg:h-16 md:h-20 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-blanco shadow-md">
         <!-- Izquierda: Botón de inicio o logo -->
         <button id="inicioLogo" class="px-2 py-0.5 rounded-sm font-archivoBlack bg-verde text-xl font-black text-blanco">
@@ -46,8 +48,8 @@ const logo = "/img/logo.png";
         if (isMobile) {
             let abierto = false;
 
-            menu.classList.remove('h-28');
-            menu.classList.add('mx-auto', 'mb-8', 'mt-6', 'h-20', 'w-11/12');
+            // menu.classList.remove('h-28');
+            menu.classList.add('mx-auto', 'mt-6', 'h-20', 'w-11/12');
 
             // Sustituye "Inicio" por el logo
             left.innerHTML = `<a href="/"><img src="/img/logo.png" alt="Logo" class="h-8"></a>`;
