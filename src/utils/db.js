@@ -1,6 +1,6 @@
 // src/lib/db.js
 import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';  // Importa dotenv
+import 'dotenv/config';  // Importa dotenv
 
 
 export const db = mysql.createPool({
@@ -8,7 +8,11 @@ export const db = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: true
+  },
   waitForConnections: true,
+  // necesario ssl? no lo se
   connectionLimit: 10,
-  queueLimit: 0,
-});
+  queueLimit: 0,});
