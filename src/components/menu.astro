@@ -49,7 +49,7 @@ const logo = "/img/logo.png";
             let abierto = false;
 
             // menu.classList.remove('h-28');
-            menu.classList.add('mx-auto', 'mt-6', 'h-20', 'w-[98%]');
+            menu.classList.add('mx-auto', 'mt-6', 'h-20', 'w-[90%]');
             //necesitamos wide a 91% para coincidir con 5/6 del menu por el padding de su div padre (necesario para tapar en el scroll)
 
             // Sustituye "Inicio" por el logo
@@ -64,7 +64,7 @@ const logo = "/img/logo.png";
             // Alternar visibilidad del menú móvil
             hamburguesa.addEventListener('click', () => {
                 abierto = !abierto;
-                hamburguesa.textContent = abierto ? '🞩' : '☰';
+                hamburguesa.textContent = abierto ? '☰' : '☰';
                 menuMovil.classList.toggle('hidden');
             });
         }
