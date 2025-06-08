@@ -23,7 +23,7 @@ const logo = "/img/logo.png";
         </ul>
     </nav>
     <!-- Menú desplegable móvil -->
-     <div id="menuMovil" class="hidden absolute top-24 mx-auto left-0 right-0 bg-blanco shadow-md shadow-slate-400 shadow-current rounded-sm p-4 z-50 space-y-4 w-5/6 text-verde font-black">
+     <div id="menuMovil" class="hidden absolute top-28 mx-auto left-0 right-0 bg-blanco shadow-md shadow-slate-400 shadow-current rounded-sm p-4 z-50 space-y-4 w-5/6 text-verde font-black">
         <a href="/servicios" class="block">Servicios</a>
         <a href="/productos" class="block">Productos</a>
         <a href="/contacto" class="block">Contacto</a>
@@ -34,49 +34,52 @@ const logo = "/img/logo.png";
 
 
 <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+    const hamburguesa = document.getElementById('hamburguesa');
+    const menuMovil = document.getElementById('menuMovil');
+
+    let abierto = false;
+
+    if (hamburguesa && menuMovil) {
+        hamburguesa.addEventListener('click', () => {
+            abierto = !abierto;
+            hamburguesa.textContent = abierto ? '✕' : '☰';
+            menuMovil.classList.toggle('hidden');
+        });
+    }
+
     function aplicarVistaMovil() {
         const isMobile = window.innerWidth <= 639;
         const menu = document.getElementById('menu');
         const left = document.getElementById('inicioLogo');
-        const hamburguesa = document.getElementById('hamburguesa');
-        const menuMovil = document.getElementById('menuMovil');
         const paginas = document.getElementById('paginas');
         const logo = document.getElementById('logo');
 
-       if (!menu || !left || !hamburguesa || !menuMovil || !paginas || !logo) return;
+        if (!menu || !left || !paginas || !logo) return;
 
         if (isMobile) {
-            let abierto = false;
-
-            // menu.classList.remove('h-28');
+            // Estilos y comportamiento solo una vez
             menu.classList.add('mx-auto', 'mt-6', 'h-20', 'w-[90%]');
-            //necesitamos wide a 91% para coincidir con 5/6 del menu por el padding de su div padre (necesario para tapar en el scroll)
-
-            // Sustituye "Inicio" por el logo
             left.innerHTML = `<a href="/"><img src="/img/logo.png" alt="Logo" class="h-8"></a>`;
             left.classList.remove('bg-verde');
-
-            // Mostrar hamburguesa y ocultar el menú normal
             hamburguesa.classList.remove('hidden');
             paginas.classList.add('hidden');
-            // logo.classList.add('hidden');
-
-            // Alternar visibilidad del menú móvil
-            hamburguesa.addEventListener('click', () => {
-                abierto = !abierto;
-                hamburguesa.textContent = abierto ? '✕' : '☰';
-                menuMovil.classList.toggle('hidden');
-            });
+        } else {
+            // Restaurar si se vuelve a modo escritorio
+            menu.classList.remove('mx-auto', 'mt-6', 'h-20', 'w-[90%]');
+            left.innerHTML = `<a href="/">INICIO</a>`;
+            left.classList.add('bg-verde');
+            hamburguesa.classList.add('hidden');
+            paginas.classList.remove('hidden');
+            menuMovil.classList.add('hidden');
+            hamburguesa.textContent = '☰';
+            abierto = false;
         }
     }
-    
 
-    // Ejecutar inmediatamente
-    window.addEventListener('load', aplicarVistaMovil);
-
-    // Y si cambia el tamaño de la pantalla después
+    aplicarVistaMovil();
     window.addEventListener('resize', aplicarVistaMovil);
+});
 
-        console.log("window",window.innerWidth);
 
 </script>
