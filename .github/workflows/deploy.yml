@@ -13,3 +13,4 @@ jobs:
           path: .
           node-version: 20
           deploy-branch: gh-pages
+          deploy_dir: ./dist
