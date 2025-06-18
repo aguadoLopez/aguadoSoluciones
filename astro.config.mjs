@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
 
 export default defineConfig({
-  output: 'server',
-  adapter: node({ mode: 'standalone'}),
+  site: 'https://lunamerino.github.io/aguadoSoluciones',
+  base: '/aguadoSoluciones/',
+  output: 'static',
   integrations: [tailwind()],
 });

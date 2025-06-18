@@ -1,47 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
----
+import marcasData from "../data/marcasproductos.json";
 
+const marcas = marcasData.marcasProductos;
+---
 <Layout>
-    <!-- Lista de Marcas de Productos-->
-    <div class="bg-blanco p-2 lg:pb-[1%] md:pb-[10%] pb-[18%]">
-        <h2 id="page-title" class="text-[25px] lg:text-[30px] md:text-center md:ml-[0%] ml-[15%] text-black font-archivoBlack font-semibold mt-4 mb-4">PRODUCTOS</h2>
-        <h2 id="page-title" class="text-[10px] lg:text-[15px] text-black font-archivoBlack t-4 ml-[15%] mb-4">MARCAS AIRES ACONDICIONADOS:</h2>
-          <div id="lista-productos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 px-[15%] gap-x-2 gap-y-6">
-            <!-- Aquí se cargarán los productos -->
+  <!-- Lista de Marcas de Productos-->
+  <div class="bg-blanco p-2 lg:pb-[1%] md:pb-[10%] pb-[18%]">
+    <h2 id="page-title" class="text-[25px] lg:text-[30px] md:text-center md:ml-[0%] ml-[15%] text-black font-archivoBlack font-semibold mt-4 mb-4">PRODUCTOS</h2>
+    <h2 id="page-subtitle" class="text-[10px] lg:text-[15px] text-black font-archivoBlack t-4 ml-[15%] mb-4">MARCAS AIRES ACONDICIONADOS:</h2>
+    <div id="lista-productos" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 px-[15%] gap-x-2 gap-y-6">
+      {
+        marcas.map((marca) => (
+          <div class="bg-blanco p-4 shadow rounded aspect-[4/3] flex items-center justify-center">
+            <img src={marca.imagen} alt={marca.nombre} class="w-[90%] h-[90%] object-contain object-center overflow-hidden" />
           </div>
+        ))
+      }
     </div>
-    
-    <script type="module">
-        document.addEventListener('DOMContentLoaded', async () => {
-          await loadProductos();
-        });
-      
-        // Función para cargar los productos
-        async function loadProductos() {
-          try {
-            // Hacemos una petición GET a la API para obtener los datos
-            const response = await fetch('/api/marcasproductos');
-            const data = await response.json();
-            console.log(data);
-            const productos = data.marcasProductos;
-      
-            const container = document.getElementById('lista-productos');
-            container.innerHTML = '';
-      
-            // Una vez obtenida la referencia del contenedor de productos, recorremos cada producto y creamos su tarjeta visual
-            productos.forEach(producto => {
-              const productoCard = document.createElement('div');
-              productoCard.classList.add('bg-blanco', 'p-4', 'shadow', 'rounded', 'aspect-[4/3]', 'flex', 'items-center', 'justify-center');
-              productoCard.innerHTML = `
-                <img src="${producto.imagen}" alt="${producto.nombre}" class="w-[90%] h-[90%] object-contain object-center overflow-hidden">            
-                `;
-              container.appendChild(productoCard);
-            });
-      
-          } catch (error) {
-            console.error('Error al cargar los productos:', error);
-          }
-        }
-    </script>
+  </div>
 </Layout>

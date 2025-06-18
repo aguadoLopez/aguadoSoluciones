@@ -1,44 +1,55 @@
+---
+import serviciosData from "../data/servicios.json";
+
+const servicios = serviciosData.servicios;
+const duplicados = [
+  servicios[servicios.length - 1],
+  ...servicios,
+  servicios[0],
+];
+---
 <section id="carrusel" class="carousel-section md:h-[66vh] h-[50vh] lg:mt-0 md:mt-16 md:mb-4 mb-12">
   <div class="relative h-full overflow-hidden">
 
     <!-- Flechas superpuestas -->
-    <button class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-blanco" id="prevBtn">
-      ❮
-    </button>
-    <button class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-blanco" id="nextBtn">
-      ❯
-    </button>
+    <button class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-blanco" id="prevBtn">❮</button>
+    <button class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-4xl text-blanco" id="nextBtn">❯</button>
 
-    <!--Aguado Soluciones -->
-    <div class="absolute left-8 top-24 left-0 md:top-36 md:left-12 lg:top-24 lg:left-24 z-10 text-center">
-      <h3 class="text-4xl md:text-5xl lg:text-6xl font-brigshotOne font-bold mb-0 md:mb-2 lg:mb-2 text-verde ">Aguado</h3>
+    <!-- Aguado Soluciones -->
+    <div class="absolute left-8 top-24 md:top-36 md:left-12 lg:top-24 lg:left-24 z-10 text-center">
+      <h3 class="text-4xl md:text-5xl lg:text-6xl font-brigshotOne font-bold mb-0 md:mb-2 lg:mb-2 text-verde">Aguado</h3>
       <h3 class="text-xl md:text-2xl lg:text-4xl font-bold ml-24 md:ml-28 lg:ml-40 text-negro">Soluciones</h3>
     </div>
-    
+
     <!-- Contenedor del carrusel -->
     <div class="carousel-container w-full h-full">
       <div id="carousel-items" class="carousel-items flex h-full transition-transform duration-300 ease-in-out">
-        <!-- Elementos insertados dinámicamente -->
+        {
+          duplicados.map(servicio => (
+            <div
+              class="carousel-item flex-shrink-0 h-[66vh] bg-[40%_center] md:bg-center flex justify-center items-center"
+              style={`background-image: url('${servicio.imagen}'); background-size: cover;`}
+            ></div>
+          ))
+        }
       </div>
     </div>
 
   </div>
 </section>
 
-
-<script>
+<script type="module">
   document.addEventListener('DOMContentLoaded', function () {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const carouselItems = document.getElementById('carousel-items') as HTMLElement | null;
-    const container = document.querySelector('.carousel-container') as HTMLElement | null;
+    const carouselItems = document.getElementById('carousel-items');
+    const container = document.querySelector('.carousel-container');
 
-    let currentIndex = 1; // Inicia en el primer slide real
-    let autoplayInterval: number;
+    let currentIndex = 1;
+    let autoplayInterval;
 
     function updateCarousel() {
       if (!container || !carouselItems) return;
-
       const width = container.offsetWidth;
       const itemCount = carouselItems.children.length;
 
@@ -48,7 +59,6 @@
       setTimeout(() => {
         if (!carouselItems || !container) return;
 
-        // Saltar al primer o último duplicado sin transición
         const width = container.offsetWidth;
         if (currentIndex === itemCount - 1) {
           carouselItems.style.transition = 'none';
@@ -63,7 +73,7 @@
     }
 
     function startAutoplay() {
-      autoplayInterval = window.setInterval(() => {
+      autoplayInterval = setInterval(() => {
         currentIndex++;
         updateCarousel();
       }, 8000);
@@ -90,45 +100,20 @@
       window.addEventListener('resize', () => {
         const containerWidth = container.offsetWidth;
         document.querySelectorAll('.carousel-item').forEach(item => {
-          if (item instanceof HTMLElement) {
-            item.style.width = `${containerWidth}px`;
-          }
+          item.style.width = `${containerWidth}px`;
         });
         updateCarousel();
       });
 
-      // Cargar contenido dinámico
-      fetch(`/api/servicios?page=1&limit=5`)
-        .then(response => response.json())
-        .then(data => {
-          const servicios = data.servicios;
+      // Ajustar el ancho inicial de los slides
+      const containerWidth = container.offsetWidth;
+      document.querySelectorAll('.carousel-item').forEach(item => {
+        item.style.width = `${containerWidth}px`;
+      });
 
-          if (!carouselItems) return;
-
-          // Duplicar último al inicio y primero al final
-          const duplicados = [
-            servicios[servicios.length - 1],
-            ...servicios,
-            servicios[0],
-          ];
-
-          carouselItems.innerHTML = duplicados.map(servicio => `
-            <div class="carousel-item flex-shrink-0 h-[66vh] bg-[40%_center] md:bg-center flex justify-center items-center"
-                 style="background-image: url('${servicio.imagen}'); background-size: cover;">
-            </div>
-          `).join('');
-
-          const containerWidth = container.offsetWidth;
-          document.querySelectorAll('.carousel-item').forEach(item => {
-            if (item instanceof HTMLElement) {
-              item.style.width = `${containerWidth}px`;
-            }
-          });
-
-          currentIndex = 1;
-          updateCarousel();
-          startAutoplay();
-        });
+      currentIndex = 1;
+      updateCarousel();
+      startAutoplay();
     }
   });
 </script>

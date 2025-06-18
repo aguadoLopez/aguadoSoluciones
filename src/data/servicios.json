@@ -1,0 +1,34 @@
+{
+  "servicios": [
+    {
+      "nombre": "Albañilería",
+      "descripcion": "Realizamos todo tipo de trabajos de albañilería, desde pequeñas reparaciones hasta grandes reformas.",
+      "desglose": "Reforma de cocina y baños\nTabiques, muros y cerramientos\nReparación de humedades y grietas\nAmpliaciones y redistribución de espacios",
+      "imagen": "/img/albañileria.jpg"
+    },
+    {
+      "nombre": "Aire Acondicionado",
+      "descripcion": "Servicio técnico autorizado de montaje de Aire Acondicionado.",
+      "desglose": "Instalación\nReparación\nCarga de gas en instalaciones antigüas",
+      "imagen": "/img/aa.webp"
+    },
+    {
+      "nombre": "Servicio de pintura",
+      "descripcion": "Transformamos interiores y exteriores con acabados duraderos y adaptados a tu estilo.",
+      "desglose": "Pintura interior y exterior\nAplicación de esmaltes, lacas y barnices\nImpermeabilizaciones de azotea con materiales de última generación (membrana de poliuretano)\nReparación de grietas y preparación de superficies",
+      "imagen": "/img/pintura.jpg"
+    },
+    {
+      "nombre": "Fontanería",
+      "descripcion": "Nos encargamos de instalaciones nuevas, mantenimiento y reparaciones.",
+      "desglose": "Instalación y reparación de grifería, sanitarios y tuberías\nLocalización y reparación de fugas\nReformas de cocinas y baños\nSistemas de evacuación y desagüe",
+      "imagen": "/img/fontaneria.jpg"
+    },
+    {
+      "nombre": "Instalación de Placas Solares",
+      "descripcion": "Ofrecemos soluciones integrales para el aprovechamiento de la energía solar, tanto en viviendas como en negocios.",
+      "desglose": "Estudio de viabilidad y dimensionamiento del sistema\nInstalación de paneles solares fotovoltaicos\nIntegración con la red eléctrica y baterías\nMantenimiento preventivo y correctivo",
+      "imagen": "/img/placasSolares.jpg"
+    }
+  ]
+}

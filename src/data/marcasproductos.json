@@ -1,0 +1,44 @@
+{
+  "marcasProductos": [
+    {
+      "nombre": "Mitsubishi",
+      "imagen": "/img/mitsubishi.png"
+    },
+    {
+      "nombre": "Daikin",
+      "imagen": "/img/daikin.png"
+    },
+    {
+      "nombre": "Panasonic",
+      "imagen": "/img/panasonic.webp"
+    },
+    {
+      "nombre": "LG",
+      "imagen": "/img/lg.png"
+    },
+    {
+      "nombre": "General",
+      "imagen": "/img/general.png"
+    },
+    {
+      "nombre": "Carrier",
+      "imagen": "/img/carrier.png"
+    },
+    {
+      "nombre": "Beko",
+      "imagen": "/img/beko.png"
+    },
+    {
+      "nombre": "Fujitsu",
+      "imagen": "/img/fujitsu.png"
+    },
+    {
+      "nombre": "Toshiba",
+      "imagen": "/img/toshiba.webp"
+    },
+    {
+      "nombre": "Hitachi",
+      "imagen": "/img/hitachi.png"
+    }
+  ]
+}

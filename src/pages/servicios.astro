@@ -1,133 +1,81 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import serviciosData from "../data/servicios.json";
+
+const servicios = serviciosData.servicios;
 ---
-
 <Layout>
-    <!-- Lista de Servicios-->
-    <div class="overflow-x-auto bg-blanco p-4 shadow-lg rounded-lg">
-        <h2 id="page-title" class="text-[25px] lg:text-[30px] text-center text-black font-semibold mb-8">SERVICIOS</h2>
-          <div id="lista-servicios" class="flex flex-wrap gap-5">
-            <!-- Aquí se cargarán los servicios -->
-          </div>
+  <!-- Lista de Servicios-->
+  <div class="overflow-x-auto bg-blanco p-4 shadow-lg rounded-lg">
+    <h2 id="page-title" class="text-[25px] lg:text-[30px] text-center text-black font-semibold mb-8">SERVICIOS</h2>
+    <div id="lista-servicios" class="flex flex-wrap gap-5">
+      {
+        servicios.map((servicio, index) => {
+          const desgloseFormateado = servicio.desglose
+            .split('\n')
+            .filter(linea => linea.trim() !== '')
+            .map(linea => `• ${linea.trim()}`)
+            .join('<br>');
+
+          const layoutClass = index % 2 === 0 ? 'flex-row' : 'flex-row-reverse';
+
+          return (
+            <div class={`servicio-card flex ${layoutClass} md:w-[85%] lg:w-[70%] mx-auto mb-24`}>
+              <div class="image w-[50%] flex items-center">
+                <img src={servicio.imagen} alt={servicio.nombre} class="object-cover rounded-sm w-3/4 h-auto rounded-lg" />
+              </div>
+              <div class="text w-[50%] flex flex-col xl:gap-8 lg:gap-4 gap-2">
+                <h3 class="text-xl font-archivoBlack uppercase font-black text-verde">{servicio.nombre}</h3>
+                <p class="text-negro font-archivoBlack">{servicio.descripcion}</p>
+                <p class="text-verde font-archivoBlack font-bold">Servicios destacados:</p>
+                <p class="text-negro font-archivoBlack" set:html={desgloseFormateado}></p>
+                <a href={`/contacto?servicio=${encodeURIComponent(servicio.nombre)}`} class="boton xl:w-[30%] self-start mt-4 bg-verde text-blanco font-archivoBlack font-bold text-[9.5px] rounded-full px-3 py-3 inline-block text-center">
+                  SOLICITAR VALORACIÓN
+                </a>
+              </div>
+            </div>
+          );
+        })
+      }
     </div>
-    
-    <script type="module">
-      // Cuando el DOM esté cargado, cargamos los servicios y aplicamos los estilos según el dispositivo
-        document.addEventListener('DOMContentLoaded', async () => {
-          await loadServicios();
-          aplicarVistaMovil();
+  </div>
+
+  <!-- Script para ajustes solo en móviles -->
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      aplicarVistaMovil();
+    });
+
+    function aplicarVistaMovil() {
+      const isMobile = window.innerWidth <= 639;
+      if (isMobile) {
+        document.querySelectorAll('.servicio-card').forEach(card => {
+          card.classList.add(
+            'w-full',
+            'mb-8',
+            'p-0',
+            'flex',
+            'flex-col',
+            'items-center',
+            'justify-center'
+          );
+          card.classList.remove(
+            'md:w-[85%]', 'lg:w-[70%]', 'mb-24'
+          );
         });
-
-        function aplicarVistaMovil() {
-          const isMobile = window.innerWidth <= 639;
-          if (isMobile) {
-            // Ajustes visuales para dispositivos móviles
-            document.querySelectorAll('.servicio-card').forEach(card => {
-              card.classList.add(
-                'w-full',
-                'mb-8',
-                'p-0',
-                'flex',
-                'flex-col',
-                'items-center',
-                'justify-center'
-              );
-              card.classList.remove(
-                'md:w-[85%]', 'lg:w-[70%]',
-                'mb-20',
-              );
-            });
-            document.querySelectorAll('.image').forEach(image => {
-              image.classList.add(
-                'w-full',
-                'px-[10%]',
-                'mb-8',
-              );
-              image.classList.remove(
-                'w-[50%]',
-                'mb-20',
-              );
-            });
-            document.querySelectorAll('.text').forEach(text => {
-              text.classList.add(
-                'w-full',
-                'px-[10%]',
-              );
-              text.classList.remove(
-                'w-[50%]',
-                'mb-20',
-              );
-            });
-            document.querySelectorAll('.boton').forEach(boton => {
-              boton.classList.add(
-                'text-sm',
-                'block',
-                'mx-auto',
-              );
-              boton.classList.remove(
-                'text-xs',
-              );
-            });
-          } else {
-            // Ajustes para pantallas grandes: alternar posición de imagen y texto
-            document.querySelectorAll('.servicio-card').forEach((card, index) => {
-
-              if (index % 2 === 0) {
-                card.classList.add('flex-row');
-                card.classList.remove('flex-row-reverse');
-              } else {
-                card.classList.add('flex-row-reverse');
-                card.classList.remove('flex-row');
-              }
-
-              const img = card.querySelector('img');
-              if (img) {
-                img.classList.add('w-3/4', 'h-auto', 'rounded-lg');
-              }
-            });
-          }
-        }
-      
-        // Función para cargar los servicios desde API
-        async function loadServicios() {
-          try {
-            const response = await fetch('/api/servicios');
-            const data = await response.json();
-            const servicios = data.servicios;
-      
-            const container = document.getElementById('lista-servicios');
-            container.innerHTML = '';
-      
-            // Formateamos desglose como lista
-            servicios.forEach(servicio => {
-              const servicioCard = document.createElement('div');
-              const desgloseFormateado = servicio.desglose
-                .split('.')
-                .filter(linea => linea.trim() !== '')
-                .map(linea => `• ${linea.trim()}.`)
-                .join('<br>');
-              servicioCard.className = 'servicio-card flex md:w-[85%] lg:w-[70%] mx-auto mb-24';
-              servicioCard.innerHTML = `
-                <div class="image w-[50%] flex items-center">
-                  <img src="${servicio.imagen}" alt="${servicio.nombre}" class="object-cover rounded-sm">
-                </div>
-                <div class="text w-[50%] flex flex-col xl:gap-8 lg:gap-4 gap-2">
-                  <h3 class="text-xl font-archivoBlack uppercase font-black text-verde">${servicio.nombre}</h3>
-                  <p class="text-negro font-archivoBlack">${servicio.descripcion}</p>
-                  <p class="text-verde font-archivoBlack font-bold">Servicios destacados:</p>
-                  <p class="text-negro font-archivoBlack">${desgloseFormateado}</p>
-                  <a href="/contacto?servicio=${encodeURIComponent(servicio.nombre)}" class="boton xl:w-[30%] self-start mt-4 bg-verde text-blanco font-archivoBlack font-bold text-[9.5px] rounded-full px-3 py-3 inline-block text-center">
-                    SOLICITAR VALORACIÓN
-                  </a>
-                </div>
-                  `;
-              container.appendChild(servicioCard);
-            });
-      
-          } catch (error) {
-            console.error('Error al cargar los servicios:', error);
-          }
-        }
-        
-    </script>
+        document.querySelectorAll('.image').forEach(image => {
+          image.classList.add('w-full', 'px-[10%]', 'mb-8');
+          image.classList.remove('w-[50%]');
+        });
+        document.querySelectorAll('.text').forEach(text => {
+          text.classList.add('w-full', 'px-[10%]');
+          text.classList.remove('w-[50%]');
+        });
+        document.querySelectorAll('.boton').forEach(boton => {
+          boton.classList.add('text-sm', 'block', 'mx-auto');
+          boton.classList.remove('text-xs');
+        });
+      }
+    }
+  </script>
 </Layout>
