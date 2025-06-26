@@ -1,5 +1,5 @@
 ---
-const logo = "/img/logo.png";
+const logo = "/aguadoSoluciones/img/logo.png";
 ---
 <div class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[4%] 
             md:pt-12 lg:pt-4 before:content-[''] before:absolute before:inset-0 
@@ -7,7 +7,7 @@ const logo = "/img/logo.png";
     <nav id="menu" class="flex md:w-10/12 lg:w-[90%] lg:h-16 md:h-20 shadow-md shadow-slate-400 shadow-current rounded-sm items-center justify-between p-4 bg-blanco shadow-md">
         <!-- Izquierda: Botón de inicio o logo -->
         <button id="inicioLogo" class="px-2 py-0.5 rounded-sm font-archivoBlack bg-verde text-xl font-black text-blanco">
-            <a href="/">INICIO</a>
+            <a href="/aguadoSoluciones">INICIO</a>
         </button>
 
         <!-- Botón hamburguesa en móvil -->
@@ -24,9 +24,9 @@ const logo = "/img/logo.png";
     </nav>
     <!-- Menú desplegable móvil -->
      <div id="menuMovil" class="hidden absolute top-28 mx-auto left-0 right-0 bg-blanco shadow-md shadow-slate-400 shadow-current rounded-sm p-4 z-50 space-y-4 w-5/6 text-verde font-black">
-        <a href="/servicios" class="block">Servicios</a>
-        <a href="/productos" class="block">Productos</a>
-        <a href="/contacto" class="block">Contacto</a>
+        <a href="/aguadoSoluciones/servicios" class="block">Servicios</a>
+        <a href="/aguadoSoluciones/productos" class="block">Productos</a>
+        <a href="/aguadoSoluciones/contacto" class="block">Contacto</a>
     </div>
     <img id="logo" src={logo} alt="Logo" class="hidden md:block md:w-24 lg:w-28">
 </div>
@@ -60,14 +60,14 @@ const logo = "/img/logo.png";
         if (isMobile) {
             // Estilos y comportamiento solo una vez
             menu.classList.add('mx-auto', 'mt-6', 'h-20', 'w-[90%]');
-            left.innerHTML = `<a href="/"><img src="/img/logo.png" alt="Logo" class="h-8"></a>`;
+            left.innerHTML = `<a href="/aguadoSoluciones"><img src="/aguadoSoluciones/img/logo.png" alt="Logo" class="h-8"></a>`;
             left.classList.remove('bg-verde');
             hamburguesa.classList.remove('hidden');
             paginas.classList.add('hidden');
         } else {
             // Restaurar si se vuelve a modo escritorio
             menu.classList.remove('mx-auto', 'mt-6', 'h-20', 'w-[90%]');
-            left.innerHTML = `<a href="/">INICIO</a>`;
+            left.innerHTML = `<a href="/aguadoSoluciones/">INICIO</a>`;
             left.classList.add('bg-verde');
             hamburguesa.classList.add('hidden');
             paginas.classList.remove('hidden');

@@ -2,43 +2,43 @@
   "marcasProductos": [
     {
       "nombre": "Mitsubishi",
-      "imagen": "/img/mitsubishi.png"
+      "imagen": "/aguadoSoluciones/img/mitsubishi.png"
     },
     {
       "nombre": "Daikin",
-      "imagen": "/img/daikin.png"
+      "imagen": "/aguadoSoluciones/img/daikin.png"
     },
     {
       "nombre": "Panasonic",
-      "imagen": "/img/panasonic.webp"
+      "imagen": "/aguadoSoluciones/img/panasonic.webp"
     },
     {
       "nombre": "LG",
-      "imagen": "/img/lg.png"
+      "imagen": "/aguadoSoluciones/img/lg.png"
     },
     {
       "nombre": "General",
-      "imagen": "/img/general.png"
+      "imagen": "/aguadoSoluciones/img/general.png"
     },
     {
       "nombre": "Carrier",
-      "imagen": "/img/carrier.png"
+      "imagen": "/aguadoSoluciones/img/carrier.png"
     },
     {
       "nombre": "Beko",
-      "imagen": "/img/beko.png"
+      "imagen": "/aguadoSoluciones/img/beko.png"
     },
     {
       "nombre": "Fujitsu",
-      "imagen": "/img/fujitsu.png"
+      "imagen": "/aguadoSoluciones/img/fujitsu.png"
     },
     {
       "nombre": "Toshiba",
-      "imagen": "/img/toshiba.webp"
+      "imagen": "/aguadoSoluciones/img/toshiba.webp"
     },
     {
       "nombre": "Hitachi",
-      "imagen": "/img/hitachi.png"
+      "imagen": "/aguadoSoluciones/img/hitachi.png"
     }
   ]
 }
