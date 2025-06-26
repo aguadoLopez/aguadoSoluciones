@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://lunamerino.github.io/aguadoSoluciones',
-  base: '/',
+  base: '/aguadoSoluciones/',
   output: 'static',
   integrations: [tailwind()],
 });
