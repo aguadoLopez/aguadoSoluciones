@@ -4,7 +4,7 @@
       "nombre": "Albañilería",
       "descripcion": "Realizamos todo tipo de trabajos de albañilería, desde pequeñas reparaciones hasta grandes reformas.",
       "desglose": "Reforma de cocina y baños\nTabiques, muros y cerramientos\nReparación de humedades y grietas\nAmpliaciones y redistribución de espacios",
-      "imagen": "/img/albañileria.jpg"
+      "imagen": "../assets/img/albañileria.jpg"
     },
     {
       "nombre": "Aire Acondicionado",
