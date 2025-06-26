@@ -29,7 +29,7 @@ const servicios = serviciosData.servicios;
                 <p class="text-negro font-archivoBlack">{servicio.descripcion}</p>
                 <p class="text-verde font-archivoBlack font-bold">Servicios destacados:</p>
                 <p class="text-negro font-archivoBlack" set:html={desgloseFormateado}></p>
-                <a href={`/contacto?servicio=${encodeURIComponent(servicio.nombre)}`} class="boton xl:w-[30%] self-start mt-4 bg-verde text-blanco font-archivoBlack font-bold text-[9.5px] rounded-full px-3 py-3 inline-block text-center">
+                <a href={`/aguadoSoluciones/contacto?servicio=${encodeURIComponent(servicio.nombre)}`} class="boton xl:w-[30%] self-start mt-4 bg-verde text-blanco font-archivoBlack font-bold text-[9.5px] rounded-full px-3 py-3 inline-block text-center">
                   SOLICITAR VALORACIÓN
                 </a>
               </div>
