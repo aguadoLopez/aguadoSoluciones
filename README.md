@@ -111,8 +111,8 @@ El desarrollo de este proyecto ha permitido aplicar una arquitectura sencilla pe
 
 ## 🤝 Contribuciones y Agradecimientos
 
-- Profesorado del módulo de Desarrollo Web
-- Recursos utilizados: documentación oficial de Astro, Tailwind CSS, MySQL y Azure
+- Profesorado del módulo de Desarrollo Web.
+- Recursos utilizados: documentación oficial de Astro, Tailwind CSS, MySQL y Azure.
 
 ---
 
