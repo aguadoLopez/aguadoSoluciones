@@ -99,7 +99,7 @@ import Layout from '../layouts/Layout.astro';
       };
 
       try {
-        const response = await fetch('https://musical-biscuit-95331f.netlify.app/.netlify/functions/send-email', {
+        const response = await fetch('https://resend-function.netlify.app/.netlify/functions/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
