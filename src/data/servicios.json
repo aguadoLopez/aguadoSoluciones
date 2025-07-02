@@ -29,12 +29,6 @@
       "descripcion": "Ofrecemos soluciones integrales para el aprovechamiento de la energía solar, tanto en viviendas como en negocios.",
       "desglose": "Estudio de viabilidad y dimensionamiento del sistema\nInstalación de paneles solares fotovoltaicos\nIntegración con la red eléctrica y baterías\nMantenimiento preventivo y correctivo",
       "imagen": "/aguadoSoluciones/img/placasSolares.jpg"
-    },
-    {
-      "nombre": "Carpintería",
-      "descripcion": "Ofrecemos soluciones para el trabajo de la madera.",
-      "desglose": "Tratamiento de muebles\nTratamiento de puertas y ventanas\nSuelos de parqué",
-      "imagen": "/aguadoSoluciones/img/carpinteria.jpg"
     }
   ]
 }
